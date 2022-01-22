@@ -24,30 +24,31 @@ const Title = styled.div`
   color: #060b25;
 `;
 
-const Paragrph = styled.div`
-  width: 51px;
-  height: 24px;
-  font-family: Poppins;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.2px;
-  color: #58606e;
-`;
-
 const Container = styled.div`
   justify-content: center;
   align-items: center;
-  background: red;
+  margin: 10px;
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: Poppins;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    color: #58606e;
+    text-overflow: ellipsis;
+  }
 `;
 
-function CardComponent() {
+function CardComponent({ imageUrl, title, label, description }) {
+  console.log(imageUrl);
   return (
     <Card>
-      <Image />
+      <Image src={imageUrl} />
       <Container>
-        <Title>Titulo</Title>
-        <Paragrph>Parrafo</Paragrph>
+        <Title>{title}</Title>
+        <p>{description}</p>
       </Container>
     </Card>
   );

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Select = styled.select`
-  width: 328px;
+  width: 100%;
   height: 48px;
   background: #ffffff;
   border: 1px solid #dde3ed;
@@ -20,14 +20,23 @@ const Select = styled.select`
   }
 `;
 
-function SelectComponent({ options }) {
+function SelectComponent({ onChange, options }) {
   return (
-    <Select>
-      <option value="">Type</option>
-      <option value="1">Audi</option>
-      <option value="2">BMW</option>
-      <option value="3">Citroen</option>
-      <option value="4">Ford</option>
+    <Select
+      placeholder="Escojer"
+      onChange={onChange}
+      defaultValue={options[0].value}
+    >
+      {options.map((option) => (
+        <option
+          key={option.key}
+          value={option.value}
+          hidden={option.hidden}
+          disabled={option.disabled}
+        >
+          {option.label}
+        </option>
+      ))}
     </Select>
   );
 }
