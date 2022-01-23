@@ -20,13 +20,9 @@ const Select = styled.select`
   }
 `;
 
-function SelectComponent({ onChange, options }) {
+function SelectComponent({ defaultValue, onChange, options }) {
   return (
-    <Select
-      placeholder="Escojer"
-      onChange={onChange}
-      defaultValue={options[0].value}
-    >
+    <Select onChange={onChange} defaultValue={defaultValue}>
       {options.map((option) => (
         <option
           key={option.key}

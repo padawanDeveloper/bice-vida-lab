@@ -42,7 +42,6 @@ const Container = styled.div`
 `;
 
 function CardComponent({ imageUrl, title, label, description }) {
-  console.log(imageUrl);
   return (
     <Card>
       <Image src={imageUrl} />

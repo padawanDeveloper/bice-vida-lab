@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Select } from "./components";
+import { Card, Dropdown } from "./components";
 import { fetchPlan } from "./api/fetchData";
 import styled from "styled-components";
 import { isNil } from "lodash";
@@ -10,13 +10,13 @@ const Button = styled.div`
   padding: 8px 32px;
   width: 113px;
   height: 48px;
-  background: #1f61f7;
+  background: ${(props) => (props.disabled ? "#dde3ed;" : "#1f61f7;")};
   box-shadow: 0px 10px 16px rgba(18, 25, 84, 0.07);
   border-radius: 1000px;
   justify-content: center;
   align-items: center;
   &:hover {
-    cursor: pointer;
+    cursor: ${(props) => (props.disabled ? "" : "pointer;")};
   }
   .text {
     font-family: Poppins;
@@ -40,13 +40,6 @@ const Container = styled.div`
 `;
 
 const options = [
-  {
-    key: 0,
-    label: "Escojer plan",
-    value: "default",
-    hidden: true,
-    disabled: true,
-  },
   {
     key: 1,
     label: "Seguro Vida Activa",
@@ -72,7 +65,7 @@ function App() {
       .then(({ data }) => setPlan(data.insurance))
       .catch((ex) => console.log(ex));
 
-  const selectOnchange = (event) => setPlanId(event.target.value);
+  const selectOnchange = (id) => setPlanId(id);
   const { image, name, price, description } = plan;
 
   const hasData =
@@ -82,9 +75,9 @@ function App() {
     <Container>
       <div style={{ width: 328 }}>
         <div>
-          <Select options={options} onChange={selectOnchange} />
+          <Dropdown onChange={selectOnchange} options={options} />
           <div className="button-container">
-            <Button onClick={getPlan} disabled={!planId}>
+            <Button onClick={planId && getPlan} disabled={!planId}>
               <div className="text">Cargar</div>
             </Button>
           </div>
